@@ -93,7 +93,7 @@ export const useTodos = () => {
   // Available categories
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(
-      todos.map(todo => todo.category).filter(Boolean)
+      todos.map(todo => todo.category).filter((category): category is string => Boolean(category))
     ));
     return uniqueCategories.sort();
   }, [todos]);
