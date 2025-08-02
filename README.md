@@ -15,7 +15,7 @@ Montrer concrètement ma progression en tant que développeur fullstack, en part
 ### 🌐 Web Frontend
 - **React / Vue / Tailwind CSS**
 - UI responsives, interactions dynamiques
-- Exemple : [à venir]
+- Exemple : [Gestionnaire de Tâches React](./frontend/todo-app/) - Application complète avec TypeScript et Tailwind CSS
 
 ### 🧠 Web Backend
 - **Node.js / NestJS / Laravel**
