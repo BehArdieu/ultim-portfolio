@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  todo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: todo-app
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - todo-network
+
+  # Service optionnel pour reverse proxy si besoin
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: todo-nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - todo-app
+    networks:
+      - todo-network
+    profiles:
+      - proxy
+
+networks:
+  todo-network:
+    driver: bridge
